@@ -148,30 +148,19 @@ CLASS lcl_program_manager IMPLEMENTATION.
 
     LOOP AT mt_object ASSIGNING FIELD-SYMBOL(<ls_object>).
 
-      ##TODO " Create Factory Class and Method
+      DATA(lv_class_name) = |lcl_object_{ <ls_object>-type }|.
+      TRANSLATE lv_class_name TO UPPER CASE.
 
-      CASE <ls_object>-type.
-        WHEN 'CLAS'.
-          DATA(lo_object_clas) = NEW lcl_object_clas( is_object = <ls_object> ).
-          lo_object_clas->delete( ).
+      TRY.
+          DATA: lo_object_class TYPE REF TO lcl_object.
+          CREATE OBJECT lo_object_class TYPE (lv_class_name)
+            EXPORTING is_object = <ls_object>.
 
-        WHEN 'INTF'.
-          DATA(lo_object_intf) = NEW lcl_object_intf( is_object = <ls_object> ).
-          lo_object_intf->delete( ).
+          lo_object_class->delete( ).
 
-        WHEN 'FUGR'.
-          DATA(lo_object_fugr) = NEW lcl_object_fugr( is_object = <ls_object> ).
-          lo_object_fugr->delete( ).
-
-        WHEN 'PROG'.
-          DATA(lo_object_prog) = NEW lcl_object_prog( is_object = <ls_object> ).
-          lo_object_prog->delete( ).
-
-        WHEN 'TRAN'.
-          DATA(lo_object_tran) = NEW lcl_object_tran( is_object = <ls_object> ).
-          lo_object_tran->delete( ).
-
-      ENDCASE.
+        CATCH cx_root.
+          " Object not supported
+      ENDTRY.
 
     ENDLOOP.
 

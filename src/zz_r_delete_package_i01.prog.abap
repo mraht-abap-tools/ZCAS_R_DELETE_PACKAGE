@@ -11,9 +11,6 @@ CLASS lcl_object DEFINITION ABSTRACT.
         !is_object TYPE s_object.
     METHODS delete ABSTRACT.
 
-  PROTECTED SECTION.
-
-
 ENDCLASS.
 
 
