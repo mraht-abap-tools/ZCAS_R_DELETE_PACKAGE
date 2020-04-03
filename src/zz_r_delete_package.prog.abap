@@ -34,5 +34,3 @@ START-OF-SELECTION.
   lcl_program_manager=>get_instance( )->delete_packages( ).
 
   lcl_program_manager=>get_instance( )->update_index( ).
-
-  zz_cl_bs_log=>get_instance( )->save( ).
