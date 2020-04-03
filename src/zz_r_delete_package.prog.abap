@@ -20,12 +20,6 @@ START-OF-SELECTION.
         lt_package_tmp TYPE tt_package,
         lt_object      TYPE tt_object.
 
-  ziot_cl_bs_log=>get_instance( )->init(
-    EXPORTING
-      iv_subobject = 'BASIS'
-      iv_extnumber = 'Delete Package'
-      iv_lgnum     = zwmgc_lgnum ).
-
   CHECK p_pckg CN ' _0'.
 
   lcl_program_manager=>get_instance( )->init( iv_pckg = p_pckg
@@ -41,4 +35,4 @@ START-OF-SELECTION.
 
   lcl_program_manager=>get_instance( )->update_index( ).
 
-  ziot_cl_bs_log=>get_instance( )->save( ).
+  zz_cl_bs_log=>get_instance( )->save( ).

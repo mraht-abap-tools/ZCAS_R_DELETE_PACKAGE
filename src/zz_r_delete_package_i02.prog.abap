@@ -49,6 +49,12 @@ CLASS lcl_program_manager IMPLEMENTATION.
     mv_pckg = iv_pckg.
     mv_subs = iv_subs.
 
+    zz_cl_bs_log=>get_instance( )->init(
+      EXPORTING
+        iv_subobject = 'BASIS'
+        iv_extnumber = 'Delete Package'
+        iv_lgnum     = zwmgc_lgnum ).
+
     SELECT SINGLE parentcl
       FROM tdevc
       WHERE devclass EQ @mv_pckg
@@ -129,7 +135,7 @@ CLASS lcl_program_manager IMPLEMENTATION.
 
         IF sy-subrc <> 0.
 
-          ziot_cl_bs_log=>get_instance( )->warning(
+          zz_cl_bs_log=>get_instance( )->warning(
             EXPORTING
               iv_msg_txt = |Package { <ls_package_tmp>-name } with parent { <ls_package_tmp>-parent } couldn't be deleted.| ).
 

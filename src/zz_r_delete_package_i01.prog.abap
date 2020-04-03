@@ -33,7 +33,7 @@ CLASS lcl_object IMPLEMENTATION.
 
     IF sy-subrc <> 0.
 
-      ziot_cl_bs_log=>get_instance( )->warning(
+      zz_cl_bs_log=>get_instance( )->warning(
         EXPORTING
           iv_msg_txt = |Object { ms_object-name } of type { iv_obj_type } couldn't be deleted.| ).
 
@@ -78,7 +78,7 @@ CLASS lcl_object_clas IMPLEMENTATION.
 
     IF sy-subrc <> 0.
 
-      ziot_cl_bs_log=>get_instance( )->warning(
+      zz_cl_bs_log=>get_instance( )->warning(
         EXPORTING
           iv_msg_txt = |Object { ms_object-name } of type { mc_obj_type } couldn't be deleted.| ).
 
