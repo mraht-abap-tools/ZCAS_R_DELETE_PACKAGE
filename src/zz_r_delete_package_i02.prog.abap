@@ -202,8 +202,6 @@ CLASS lcl_program_manager IMPLEMENTATION.
 
   METHOD determine_packages.
 
-    CHECK mt_package IS NOT INITIAL.
-
     APPEND VALUE s_package( name = mv_pckg ) TO mt_package.
     DATA(lt_r_package) = VALUE rseloption( ( sign   = 'I'
                                              option = 'EQ'
@@ -217,8 +215,6 @@ CLASS lcl_program_manager IMPLEMENTATION.
           FROM tdevc
           WHERE parentcl IN @lt_r_package
           INTO TABLE @DATA(lt_package_tmp).
-
-        CHECK lt_package_tmp IS NOT INITIAL.
 
         APPEND LINES OF lt_package_tmp TO mt_package.
 
