@@ -59,14 +59,12 @@ CLASS lcl_program_manager IMPLEMENTATION.
 
   METHOD update_index.
 
-    DATA: lo_cross TYPE REF TO cl_wb_crossreference.
-
     CHECK mv_pckg_parent CN ' _0'.
 
     DATA(lo_wb_crossreference) = NEW cl_wb_crossreference( p_name    = CONV #( mv_pckg_parent )
                                                            p_include = CONV #( mv_pckg_parent ) ).
 
-    lo_cross->index_actualize( ).
+    lo_wb_crossreference->index_actualize( ).
 
   ENDMETHOD.
 
