@@ -1,13 +1,13 @@
 *&---------------------------------------------------------------------*
-*& Report zz_r_delete_package
+*& Report zcas_r_delete_package
 *&---------------------------------------------------------------------*
 *&
 *&---------------------------------------------------------------------*
-REPORT zz_r_delete_package.
+REPORT zcas_r_delete_package.
 
-INCLUDE zz_r_delete_package_i00.
-INCLUDE zz_r_delete_package_i01.
-INCLUDE zz_r_delete_package_i02.
+INCLUDE zcas_r_delete_package_i00.
+INCLUDE zcas_r_delete_package_i01.
+INCLUDE zcas_r_delete_package_i02.
 
 ##TODO " Support handling of transport requests
 

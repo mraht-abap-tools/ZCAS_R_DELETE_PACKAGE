@@ -1,5 +1,5 @@
 *&---------------------------------------------------------------------*
-*&  Include  zz_r_delete_package_i02
+*&  Include  zcas_r_delete_package_i02
 *&---------------------------------------------------------------------*
 CLASS lcl_program_manager DEFINITION FINAL.
 

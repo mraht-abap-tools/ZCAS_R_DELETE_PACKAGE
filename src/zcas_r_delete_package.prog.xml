@@ -3,10 +3,9 @@
  <asx:abap xmlns:asx="http://www.sap.com/abapxml" version="1.0">
   <asx:values>
    <PROGDIR>
-    <NAME>ZZ_R_DELETE_PACKAGE_I01</NAME>
+    <NAME>ZCAS_R_DELETE_PACKAGE</NAME>
     <DBAPL>S</DBAPL>
-    <DBNA>D$</DBNA>
-    <SUBC>I</SUBC>
+    <SUBC>1</SUBC>
     <FIXPT>X</FIXPT>
     <LDBNAME>D$S</LDBNAME>
     <UCCHECK>X</UCCHECK>
@@ -14,8 +13,21 @@
    <TPOOL>
     <item>
      <ID>R</ID>
-     <ENTRY>Include 01</ENTRY>
-     <LENGTH>10</LENGTH>
+     <ENTRY>Delete packages and its subobjects</ENTRY>
+     <LENGTH>34</LENGTH>
+    </item>
+    <item>
+     <ID>S</ID>
+     <KEY>P_PCKG</KEY>
+     <ENTRY>.</ENTRY>
+     <LENGTH>9</LENGTH>
+     <SPLIT>D</SPLIT>
+    </item>
+    <item>
+     <ID>S</ID>
+     <KEY>P_SUBS</KEY>
+     <ENTRY>Unterpakete berücksichtigen</ENTRY>
+     <LENGTH>35</LENGTH>
     </item>
    </TPOOL>
   </asx:values>

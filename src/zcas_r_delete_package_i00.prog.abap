@@ -1,5 +1,5 @@
 *&---------------------------------------------------------------------*
-*&  Include  zz_r_delete_package_i00
+*&  Include  zcas_r_delete_package_i00
 *&---------------------------------------------------------------------*
 CONSTANTS: cv_pgmid    TYPE pgmid     VALUE 'R3TR',
            cv_pck_type TYPE trobjtype VALUE 'DEVC'.
