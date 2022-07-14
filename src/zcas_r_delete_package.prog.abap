@@ -10,6 +10,7 @@ INCLUDE zcas_r_delete_package_i01.
 INCLUDE zcas_r_delete_package_i02.
 
 ##TODO " Support handling of transport requests
+##TODO " Support hard deletion of db table TADIR (checkbox)
 
 PARAMETERS: p_pckg TYPE devclass,
             p_subs AS CHECKBOX DEFAULT abap_true.
