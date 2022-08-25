@@ -20,7 +20,7 @@
      <ID>S</ID>
      <KEY>P_PCKG</KEY>
      <ENTRY>.</ENTRY>
-     <LENGTH>9</LENGTH>
+     <LENGTH>15</LENGTH>
      <SPLIT>D</SPLIT>
     </item>
     <item>
@@ -29,7 +29,44 @@
      <ENTRY>Unterpakete berücksichtigen</ENTRY>
      <LENGTH>35</LENGTH>
     </item>
+    <item>
+     <ID>S</ID>
+     <KEY>P_TADIR</KEY>
+     <ENTRY>Einträge in TADIR löschen</ENTRY>
+     <LENGTH>33</LENGTH>
+    </item>
    </TPOOL>
+   <I18N_TPOOL>
+    <item>
+     <LANGUAGE>D</LANGUAGE>
+     <TEXTPOOL>
+      <item>
+       <ID>R</ID>
+       <ENTRY>Delete packages and its subobjects</ENTRY>
+       <LENGTH>70</LENGTH>
+      </item>
+      <item>
+       <ID>S</ID>
+       <KEY>P_SUBS</KEY>
+       <ENTRY>Consider sub packages</ENTRY>
+       <LENGTH>38</LENGTH>
+      </item>
+      <item>
+       <ID>S</ID>
+       <KEY>P_TADIR</KEY>
+       <ENTRY>Delete entries in TADIR</ENTRY>
+       <LENGTH>38</LENGTH>
+      </item>
+      <item>
+       <ID>S</ID>
+       <KEY>P_PCKG</KEY>
+       <ENTRY>.</ENTRY>
+       <LENGTH>15</LENGTH>
+       <SPLIT>D</SPLIT>
+      </item>
+     </TEXTPOOL>
+    </item>
+   </I18N_TPOOL>
   </asx:values>
  </asx:abap>
 </abapGit>

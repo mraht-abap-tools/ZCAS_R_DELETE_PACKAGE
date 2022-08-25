@@ -4,55 +4,56 @@
 CLASS lcl_program_manager DEFINITION FINAL.
 
   PUBLIC SECTION.
-    CLASS-METHODS get_instance
-      RETURNING VALUE(ro_instance) TYPE REF TO lcl_program_manager.
-    METHODS update_index.
-    METHODS delete_packages.
-    METHODS init
+    CLASS-METHODS execute
       IMPORTING
-        iv_pckg TYPE devclass
-        iv_subs TYPE abap_bool.
-    METHODS delete_objects.
-    METHODS determine_objects.
-    METHODS determine_packages.
+        iv_pckg  TYPE devclass
+        iv_subs  TYPE abap_bool
+        iv_tadir TYPE abap_bool.
 
   PROTECTED SECTION.
-    DATA: mv_pckg        TYPE devclass,
-          mv_subs        TYPE abap_bool,
-          mv_pckg_parent TYPE parentcl,
-          mt_package     TYPE tt_package,
-          mt_object      TYPE tt_object.
+    CLASS-DATA: mv_pckg        TYPE devclass,
+                mv_subs        TYPE abap_bool,
+                mv_tadir       TYPE abap_bool,
+                mv_pckg_parent TYPE parentcl,
+                mt_package     TYPE tt_package,
+                mt_object      TYPE tt_object.
 
   PRIVATE SECTION.
-    CLASS-DATA: mo_instance TYPE REF TO lcl_program_manager.
+    CLASS-METHODS update_index.
+    CLASS-METHODS delete_packages.
+    CLASS-METHODS delete_objects.
+    CLASS-METHODS delete_tadir.
+    CLASS-METHODS determine_objects.
+    CLASS-METHODS determine_packages.
+
 
 ENDCLASS.
 
 
 CLASS lcl_program_manager IMPLEMENTATION.
 
-  METHOD get_instance.
+  METHOD execute.
 
-    IF mo_instance IS NOT BOUND.
-
-      mo_instance = NEW lcl_program_manager( ).
-
-    ENDIF.
-
-    ro_instance = mo_instance.
-
-  ENDMETHOD.
-
-
-  METHOD init.
-
-    mv_pckg = iv_pckg.
-    mv_subs = iv_subs.
+    mv_pckg  = iv_pckg.
+    mv_subs  = iv_subs.
+    mv_tadir = iv_tadir.
 
     SELECT SINGLE parentcl
       FROM tdevc
       WHERE devclass EQ @mv_pckg
       INTO @mv_pckg_parent.
+
+    determine_packages( ).
+
+    determine_objects( ).
+
+    delete_objects( ).
+
+    delete_tadir( ).
+
+    delete_packages( ).
+
+    update_index( ).
 
   ENDMETHOD.
 
@@ -61,8 +62,9 @@ CLASS lcl_program_manager IMPLEMENTATION.
 
     CHECK mv_pckg_parent CN ' _0'.
 
-    DATA(lo_wb_crossreference) = NEW cl_wb_crossreference( p_name    = CONV #( mv_pckg_parent )
-                                                           p_include = CONV #( mv_pckg_parent ) ).
+    DATA(lo_wb_crossreference) = NEW cl_wb_crossreference(
+      p_name    = CONV #( mv_pckg_parent )
+      p_include = CONV #( mv_pckg_parent ) ).
 
     lo_wb_crossreference->index_actualize( ).
 
@@ -110,12 +112,6 @@ CLASS lcl_program_manager IMPLEMENTATION.
             iv_action             = 'DELE'
             iv_dialog             = abap_false
             is_devclass           = ls_devclass
-*           is_fields_for_change  =
-*           iv_request            =
-*  IMPORTING
-*           es_devclass           =
-*           ev_something_changed  =
-*           ev_request            =
           EXCEPTIONS
             no_authorization      = 1
             invalid_devclass      = 2                " INvalid development class
@@ -165,6 +161,16 @@ CLASS lcl_program_manager IMPLEMENTATION.
     IF mt_object IS NOT INITIAL.
       COMMIT WORK.
     ENDIF.
+
+  ENDMETHOD.
+
+
+  METHOD delete_tadir.
+
+    CHECK mv_tadir EQ abap_true.
+
+    DELETE FROM tadir WHERE devclass EQ @mv_pckg.
+    COMMIT WORK.
 
   ENDMETHOD.
 

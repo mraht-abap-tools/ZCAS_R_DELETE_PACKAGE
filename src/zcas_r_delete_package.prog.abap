@@ -9,11 +9,12 @@ INCLUDE zcas_r_delete_package_i00.
 INCLUDE zcas_r_delete_package_i01.
 INCLUDE zcas_r_delete_package_i02.
 
+##TODO " Error handling + success message
 ##TODO " Support handling of transport requests
-##TODO " Support hard deletion of db table TADIR (checkbox)
 
-PARAMETERS: p_pckg TYPE devclass,
-            p_subs AS CHECKBOX DEFAULT abap_true.
+PARAMETERS: p_pckg  TYPE devclass,
+            p_subs  AS CHECKBOX DEFAULT abap_true,
+            p_tadir AS CHECKBOX DEFAULT abap_false.
 
 START-OF-SELECTION.
   DATA: lv_pckg_parent TYPE parentcl,
@@ -23,15 +24,6 @@ START-OF-SELECTION.
 
   CHECK p_pckg CN ' _0'.
 
-  lcl_program_manager=>get_instance( )->init( iv_pckg = p_pckg
-                                              iv_subs = p_subs ).
-
-  lcl_program_manager=>get_instance( )->determine_packages( ).
-
-  lcl_program_manager=>get_instance( )->determine_objects( ).
-
-  lcl_program_manager=>get_instance( )->delete_objects( ).
-
-  lcl_program_manager=>get_instance( )->delete_packages( ).
-
-  lcl_program_manager=>get_instance( )->update_index( ).
+  lcl_program_manager=>execute( iv_pckg  = p_pckg
+                                iv_subs  = p_subs
+                                iv_tadir = p_tadir ).
